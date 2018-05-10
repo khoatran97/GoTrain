@@ -21,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/khoatran97/GoTrain/issues"
   },
-  "homepage": "https://github.com/khoatran97/GoTrain#readme"
+  "homepage": "https://github.com/khoatran97/GoTrain#readme",
+  "scripts": {
+    "start": "node service.js"
+  }
 }
