@@ -5,11 +5,12 @@
   "main": "service.js",
   "dependencies": {
     "express": "^4.16.3",
-    "express-handlebars": "^3.0.0"
+    "express-handlebars": "^3.0.0",
+    "express-handlebars-sections": "^1.0.1"
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node service.js"
   },
   "repository": {
     "type": "git",
@@ -21,8 +22,5 @@
   "bugs": {
     "url": "https://github.com/khoatran97/GoTrain/issues"
   },
-  "homepage": "https://github.com/khoatran97/GoTrain#readme",
-  "scripts": {
-    "start": "node service.js"
-  }
+  "homepage": "https://github.com/khoatran97/GoTrain#readme"
 }
