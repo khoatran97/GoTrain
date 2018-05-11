@@ -1,0 +1,126 @@
+<aside id="colorlib-hero">
+      <div class="flexslider">
+        <ul class="slides">
+          <li style="background-image: url(images/cover-img-5.jpg);">
+            <div class="overlay"></div>
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-md-6 col-md-offset-3 col-sm-12 col-xs-12 slider-text">
+                  <div class="slider-text-inner text-center">
+                    <h1>About us</h1>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          </ul>
+        </div>
+    </aside>
+<div ng-controller="KiemTraVeController" class="kt-form ng-scope">
+<br>
+<br>
+<br>
+<br>
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="ng-binding">Kiểm tra vé<!--Kiểm tra vé--></h3>
+            <div class="alert alert-info">
+                <div ng-bind-html="'PKTraVe_MoTa'|translate" class="ng-binding">Theo quy định của Tổng công ty Đường sắt Việt Nam, hành khách có thông tin giấy tờ tùy thân trùng với thông tin trên vé điện tử mới đủ điều kiện vào ga lên tàu.<br>Để đảm bảo quyền lợi cho hành khách, tránh mua phải vé giả, hoặc vé không đúng với quy định, quý khách có thể kiểm tra lại vé điện tử của mình bằng cách điền đầy đủ các thông tin dưới đây.</div>
+            </div>
+            
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-xs-4 col-sm-2 col-md-2">
+                <label class="kt-form-label ng-binding" ng-class="{'has-error': maVeError}">Mã vé<!--Mã vé--></label>
+            </div>
+            <div class="col-xs-8 col-sm-4 col-md-4">
+                <div class="form-group" ng-class="{'has-error': maVeError}">
+                    
+                    <input type="text" class="form-control ng-pristine ng-valid" ng-model="searchData.maVe" ng-disabled="isRequesting" ng-change="maVeError = false" placeholder="Nhập mã vé bao gồm 8 ký tự số" id="maVe">
+                </div>
+            </div>
+            <div class="col-xs-4 col-sm-2 col-md-2">
+                <label class="kt-form-label ng-binding" ng-class="{'has-error': macTauError}">Mác tàu<!--Mác tàu--></label>
+            </div>
+            <div class="col-xs-8 col-sm-4 col-md-4">
+                <div class="form-group" ng-class="{'has-error': macTauError}">
+                    
+                    <input type="text" class="form-control ng-pristine ng-valid" ng-model="searchData.macTau" ng-change="macTauError = false" placeholder="Ví dụ SE1, TN1, SE2, SE6 ..." id="gaDen">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-4 col-sm-2 col-md-2">
+                <label class="kt-form-label ng-binding" ng-class="{'has-error': gaDenError}">Ga đến<!--Ga đến--></label>
+            </div>
+            <div class="col-xs-8 col-sm-4 col-md-4">
+                <div class="form-group" ng-class="{'has-error': gaDenError}">
+                    
+                    <input type="text" class="form-control ng-pristine ng-valid" ng-model="searchData.tenGaDen" ng-change="verifyGa(searchData.tenGaDen, false)" typeahead-on-select="setMaGaDen($item)" typeahead="ga.TenGa for ga in gas | filter:$viewValue | limitTo:10" placeholder="Nhập mã ga đến tại đây" id="gaDen" aria-autocomplete="list" aria-expanded="false" aria-owns="typeahead-04I-5582">
+                </div>
+            </div>
+            <div class="col-xs-4 col-sm-2 col-md-2">
+                <label class="kt-form-label ng-binding" ng-class="{'has-error': ngayDiError}">Ngày đi<!--Ngày đi--></label>
+            </div>
+            <div class="col-xs-8 col-sm-4 col-md-4">
+                <div class="form-group" ng-class="{'has-error': ngayDiError}">
+                   
+                    <div class="input-group input-cal-picker">
+                        <input type="text" class="form-control ng-isolate-scope ng-pristine ng-invalid ng-invalid-required ng-valid-date" show-weeks="false" show-button-bar="false" datepicker-popup="dd/MM/yyyy" ng-model="searchData.ngayDi" is-open="ngayDi_opened" min-date="minDate" datepicker-options="dateOptions" ng-required="true" ng-click="open_ngayDi($event)" placeholder="dd/MM/yyyy" id="ngayDi" ng-readonly="true" ng-class="{'et-error-block': ngayDiError}" ng-change="ngayDiError = false" required="required" readonly="readonly"><ul class="dropdown-menu ng-pristine ng-valid ng-valid-date-disabled" ng-style="{display: (isOpen &amp;&amp; 'block') || 'none', top: position.top+'px', left: position.left+'px'}" ng-keydown="keydown($event)" datepicker-popup-wrap="" ng-model="date" ng-change="dateSelection()" style="display: none;">
+	<li ng-transclude=""><div ng-switch="datepickerMode" role="application" ng-keydown="keydown($event)" datepicker="" format-year="yy" starting-day="1" min-date="watchData.minDate" class="ng-isolate-scope">
+  <!-- ngSwitchWhen: day --><table role="grid" aria-labelledby="datepicker-04N-3140-title" aria-activedescendant="datepicker-04N-3140-12" ng-switch-when="day" tabindex="0">
+  <thead>
+    <tr>
+      <th><button type="button" class="btn btn-default btn-sm pull-left" ng-click="move(-1)" tabindex="-1"><i class="glyphicon glyphicon-chevron-left"></i></button></th>
+      <th colspan="6"><button id="datepicker-04N-3140-title" role="heading" aria-live="assertive" aria-atomic="true" type="button" class="btn btn-default btn-sm" ng-click="toggleMode()" tabindex="-1" style="width:100%;"><strong class="ng-binding">May 2018</strong></button></th>
+      <th><button type="button" class="btn btn-default btn-sm pull-right" ng-click="move(1)" tabindex="-1"><i class="glyphicon glyphicon-chevron-right"></i></button></th>
+    </tr>
+    
+    </tr>
+  </thead>
+ 
+</table>
+  <!-- ngSwitchWhen: month -->
+  <!-- ngSwitchWhen: year -->
+</div></li>
+	<!-- ngIf: showButtonBar -->
+</ul>
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-primary" ng-click="open_ngayDi($event)" style="padding: 6px 8px 7px 8px;">
+                                <i class="glyphicon glyphicon-calendar" style="font-size: 18px;"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-4 col-sm-2 col-md-2">
+                <label class="kt-form-label ng-binding" ng-class="{'has-error': gaDiError}">Ga đi<!--Ga đi--></label>
+            </div>
+            <div class="col-xs-8 col-sm-4 col-md-4">
+                <div class="form-group" ng-class="{'has-error': gaDiError}">
+                    
+                    <input type="text" class="form-control ng-pristine ng-valid" ng-model="searchData.tenGaDi" ng-change="verifyGa(searchData.tenGaDi, true)" typeahead-on-select="setMaGaDi($item)" typeahead="ga.TenGa for ga in gas | filter:$viewValue | limitTo:10" placeholder="Nhập mã ga đi tại đây" id="gaDi" aria-autocomplete="list" aria-expanded="false" aria-owns="typeahead-04K-849">
+                </div>
+            </div>
+
+            <div class="col-xs-4 col-sm-2 col-md-2">
+                <label class="kt-form-label ng-binding">Số giấy tờ<!--Số giấy tờ--></label>
+            </div>
+            <div class="col-xs-8 col-sm-4 col-md-4">
+                <div class="form-group">
+                    <!--<span class="control-label" ng-show="cmtError">Vui lòng nhập số giấy tờ cá nhân ghi trên vé</span>-->
+                    <input type="text" class="form-control ng-pristine ng-valid" ng-model="searchData.cmt" ng-change="cmtError=false" placeholder="Nhập giấy tờ cá nhân ghi trên vé" id="maVe">
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <div class="col-md-12">
+                <input analytics-on="click" analytics-event="DoCheckTicket" type="button" class="btn btn-primary" ng-click="submitForm()" value="Kiểm tra vé" style="border-radius: 4px !important;">
+            </div>
+  
+</div>
