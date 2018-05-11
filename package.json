@@ -4,6 +4,7 @@
   "description": "Hệ thống quản lý bán vé xe lửa - Đồ án cuối kì Phân tích Thiết kế Phần mềm",
   "main": "service.js",
   "dependencies": {
+    "body-parser": "^1.18.2",
     "express": "^4.16.3",
     "express-handlebars": "^3.0.0",
     "express-handlebars-sections": "^1.0.1"

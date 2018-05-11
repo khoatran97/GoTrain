@@ -1,9 +1,12 @@
 var express = require('express');
 var hbs = require('express-handlebars');
 var express_handlebars_sections = require('express-handlebars-sections');
+var bodyParser = require('body-parser');
 var path = require('path');
 
-var app = express()
+var guestController = require('./controllers/guestController');
+
+var app = express();
 
 app.engine('hbs', hbs({
 	defaultLayout: 'main',
@@ -12,10 +15,17 @@ app.engine('hbs', hbs({
     }
 }));
 app.set('view engine', 'hbs');
-app.use(express.static(path.join(__dirname, '/public')));
+app.use(express.static(path.resolve(__dirname, 'public')));
 
-app.get('/', function(req, res) {
-    res.render('home');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
+
+app.get('/', (req, res) => {
+    res.redirect('/guest');
 });
+
+app.use('/guest', guestController);
 
 app.listen(3000);
