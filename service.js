@@ -22,10 +22,10 @@ app.use(bodyParser.urlencoded({
     extended: false
 }));
 
-app.get('/', (req, res) => {
+/*app.get('/', (req, res) => {
     res.redirect('/guest');
-});
+});*/
 
-app.use('/guest', guestController);
+app.use('/', guestController);
 
 app.listen(3000);

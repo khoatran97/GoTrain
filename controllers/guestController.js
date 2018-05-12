@@ -3,19 +3,19 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/', (req, res) => {
-    res.render('guest/home');
+    res.render('home');
 });
 
 router.get('/about', (req, res) => {
-    res.render('guest/about');
+    res.render('about');
 });
 
 router.get('/contact', (req, res) => {
-    res.render('guest/contact');
+    res.render('contact');
 });
 
 router.get('/test',(req,res)=>{
-	res.render('guest/test');
+	res.render('test');
 })
 
 module.exports = router;
