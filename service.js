@@ -5,6 +5,7 @@ var bodyParser = require('body-parser');
 var path = require('path');
 
 var guestController = require('./controllers/guestController');
+var adminController = require('./controllers/adminController');
 
 var app = express();
 
@@ -22,9 +23,7 @@ app.use(bodyParser.urlencoded({
     extended: false
 }));
 
-/*app.get('/', (req, res) => {
-    res.redirect('/guest');
-});*/
+app.use('/admin', adminController);
 
 app.use('/', guestController);
 
