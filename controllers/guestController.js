@@ -14,6 +14,10 @@ router.get('/contact', (req, res) => {
     res.render('contact');
 });
 
+router.get('/login', (req, res) => {
+    res.render('login', {layout: false});
+})
+
 router.get('/test',(req,res)=>{
 	res.render('test');
 })
