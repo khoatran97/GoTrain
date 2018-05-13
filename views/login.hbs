@@ -35,6 +35,12 @@
 						Đăng nhập 
 					</span>
 
+					{{#if isIncorrect}}
+					<!-- login unsuccessfully alert-->
+					<div class="alert alert-danger m-b-36 col-md-12" role="alert">
+						Đăng nhập không thành công
+					</div>
+					{{/if}}
 					<span class="txt1 p-b-11">
 						Tên đăng nhập
 					</span>

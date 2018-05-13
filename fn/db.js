@@ -1,13 +1,13 @@
 var mysql = require('mysql');
 
-exports.load = sql => {
+module.exports.load = sql => {
     return new Promise((resolve, reject) => {
         var cn = mysql.createConnection({
             host: 'localhost',
-            port: 3306,
+            port: 8889,
             user: 'root',
             password: 'root',
-            database: 'qlvt'
+            database: 'test'
         });
 
         cn.connect();
@@ -18,9 +18,9 @@ exports.load = sql => {
             } else {
                 resolve(rows);
             }
-
-            cn.end();
         });
+
+        cn.end();
     });
 }
 
@@ -28,10 +28,10 @@ exports.save = sql => {
     return new Promise((resolve, reject) => {
         var cn = mysql.createConnection({
             host: 'localhost',
-            port: 3306,
+            port: 8889,
             user: 'root',
             password: 'root',
-            database: 'qlvt'
+            database: 'test'
         });
 
         cn.connect();

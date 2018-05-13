@@ -1,4 +1,5 @@
 var express = require('express');
+var userRepo = require('../repository/userRepo.js')
 
 
 // Dieu huong
@@ -37,8 +38,27 @@ router.get('/test',(req,res)=>{
 router.post('/login', (req, res) => {
     console.log(req.body);
 
-    // Check username and pass work
-    res.redirect('/admin');
+    var username = req.body.username;
+    var password = req.body.password;
+    var isSuccess = false;
+    userRepo.loadByUsername(username).then(rows => {
+        console.log(rows);
+        if (rows[0] != null) {
+            if (rows[0].password == password) {
+                res.redirect('/admin');
+                isSuccess = true;
+            }
+        }
+
+        if (!isSuccess) {
+            var param = {
+                layout: false,
+                isIncorrect: true
+            }
+            res.render('login', param);
+        }
+        
+    })
 })
 
 module.exports.router = router;
