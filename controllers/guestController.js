@@ -1,7 +1,10 @@
 var express = require('express');
 
+
+// Dieu huong
 var router = express.Router();
 
+// GET
 router.get('/', (req, res) => {
     res.render('home');
 });
@@ -30,4 +33,19 @@ router.get('/test',(req,res)=>{
 	res.render('test');
 })
 
-module.exports = router;
+// POST
+router.post('/login', (req, res) => {
+    console.log(req.body);
+
+    // Check username and pass work
+    res.redirect('/admin');
+})
+
+module.exports.router = router;
+
+// Xu ly
+
+// Ham xu ly dang nhap
+module.exports.login = (username, passwork) => {
+    
+}

@@ -24,7 +24,7 @@ app.use(bodyParser.urlencoded({
     extended: false
 }));
 
-app.use('/', guestController);
+app.use('/', guestController.router);
 
 app.use('/admin', adminController);
 
