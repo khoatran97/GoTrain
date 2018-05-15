@@ -1,5 +1,6 @@
 var express = require('express');
-var userRepo = require('../repository/userRepo.js')
+var userRepo = require('../repository/userRepo.js');
+var ticketRepo = require('../repository/ticketRepo.js');
 
 
 // Dieu huong
@@ -58,14 +59,37 @@ router.post('/login', (req, res) => {
             res.render('login', param);
         }
         
-    })
-})
+    });
+});
+
+router.post('/test', (req, res) => {
+	console.log(req.body);
+    ticketRepo.check(req.body).then(rows => {
+    	console.log(rows);
+    	var vm;
+    	if(rows[0]!=null){
+    			vm={
+	        	valid: true
+	        };
+    		
+    	}
+    	else {
+    		vm={
+	        	invalid: true
+	        };
+    	}
+    	res.render('test', vm);
+
+    }).catch(err => {
+        res.end('fail');
+    });
+});
 
 module.exports.router = router;
 
 // Xu ly
 
-// Ham xu ly dang nhap
-module.exports.login = (username, passwork) => {
+// // Ham xu ly dang nhap
+// module.exports.login = (username, passwork) => {
     
-}
+// }

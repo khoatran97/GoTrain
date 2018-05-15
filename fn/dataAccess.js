@@ -4,10 +4,9 @@ module.exports.load = sql => {
     return new Promise((resolve, reject) => {
         var cn = mysql.createConnection({
             host: 'localhost',
-            port: 8889,
             user: 'root',
-            password: 'root',
-            database: 'test'
+            password: 'chun6002',
+            database: 'qlvt'
         });
 
         cn.connect();
