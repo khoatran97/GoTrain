@@ -1,6 +1,6 @@
 var express = require('express');
-var userRepo = require('../repository/userRepo.js');
-var ticketRepo = require('../repository/ticketRepo.js');
+var userRepo = require('../repository/userRepo');
+var ticketRepo = require('../repository/ticketRepo');
 
 
 // Dieu huong

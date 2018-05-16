@@ -7,8 +7,19 @@ use GoTrain;
 create table NhanVien (
 	MaNV int auto_increment primary key, 
 	HoTen nvarchar(50) not null,
-	Username varchar(30) not null,	
-	Password varchar(30) not null
+    GioiTinh bit not null,
+    NgaySinh datetime not null,
+    CMND varchar(20) not null,
+    DiaChi nvarchar(50) not null,
+    SoDienThoai varchar(20) not null
+);
+
+create table TaiKhoan (
+    MaNV int,
+	Username varchar(30) not null primary key,	
+	Password varchar(30) not null,
+    foreign key(MaNV)
+    references NhanVien(MaNV),
 );
 
 /****3 loại ghế, mỗi loại ghế sẽ có số Toa tương ứng****/

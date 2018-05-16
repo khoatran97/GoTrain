@@ -35,11 +35,11 @@ exports.save = sql => {
 
         cn.connect();
 
-        cn.query(sql, function(error, value) {
+        cn.query(sql, values, function(error, result) {
             if (error) {
                 reject(error);
             } else {
-                resolve(value);
+                resolve(result);
             }
 
             cn.end();

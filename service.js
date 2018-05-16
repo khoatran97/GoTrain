@@ -17,6 +17,7 @@ app.engine('hbs', hbs({
 }));
 
 app.set('view engine', 'hbs');
+app.set('views', __dirname+'/views/');
 app.use(express.static(path.resolve(__dirname, 'public')));
 
 app.use(bodyParser.json());
@@ -26,6 +27,6 @@ app.use(bodyParser.urlencoded({
 
 app.use('/', guestController.router);
 
-app.use('/admin', adminController);
+app.use('/admin', adminController.router);
 
 app.listen(3000);
