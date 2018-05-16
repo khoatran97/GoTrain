@@ -35,6 +35,10 @@ router.get('/test',(req,res)=>{
 	res.render('test');
 })
 
+router.get('/pick-up', (req, res) => {
+    res.render('pick-up');
+})
+
 // POST
 router.post('/login', (req, res) => {
     console.log(req.body);
@@ -63,8 +67,8 @@ router.post('/login', (req, res) => {
 });
 
 router.post('/test', (req, res) => {
-	console.log(req.body);
-    ticketRepo.check(req.body).then(rows => {
+    var date=formatDate(req.body.NgayDi);
+    ticketRepo.check(req.body, date).then(rows => {
     	console.log(rows);
     	var vm;
     	if(rows[0]!=null){
@@ -85,11 +89,32 @@ router.post('/test', (req, res) => {
     });
 });
 
+router.post('/',(req, res)=>{
+    console.log(req.body);
+    var date=formatDate(req.body.NgayDi);
+    ticketRepo.lookup(req.body, date).then(rows => {
+        console.log(rows);
+        if(rows[0]!=null){
+            res.redirect('/pick-up');
+        }
+        else {
+            var vm={
+                invalid: true
+            };
+            res.render('home', vm);
+        }
+    })
+});
+
 module.exports.router = router;
 
 // Xu ly
-
-// // Ham xu ly dang nhap
-// module.exports.login = (username, passwork) => {
-    
-// }
+// // Hàm format ngày
+function formatDate (date){
+    var d = new Date(JSON.stringify(date));
+    var dd=d.getDate();
+    var mm=d.getMonth()+1;
+    var yy=d.getFullYear();
+    var newdate=yy+"-"+mm+"-"+dd;
+    return newdate;
+}
