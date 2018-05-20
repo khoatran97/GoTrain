@@ -19,6 +19,13 @@ router.get('/contact', (req, res) => {
     res.render('contact');
 });
 
+router.get('/giohang',(req,res)=>{
+
+    res.render('giohang');
+
+})
+
+
 router.get('/destinations', (req, res) => {
     res.render('destinations');
 })
