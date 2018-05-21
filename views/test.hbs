@@ -1,16 +1,4 @@
-{{#if valid}}
-<div class="alert alert-success">
-    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    Vé hợp lệ.
-</div>
-{{/if}}
 
-{{#if invalid}}
-<div class="alert alert-danger">
-    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    Vé không hợp lệ.
-</div>
-{{/if}}
 
 <aside id="colorlib-hero">
       <div class="flexslider">
@@ -46,9 +34,24 @@
                 <div class="alert alert-info">
                     <div ng-bind-html="'PKTraVe_MoTa'|translate" class="ng-binding">Theo quy định của Tổng công ty Ðường sắt Viêt Nam, hành khách có thông tin giấy tờ tùy thân trùng với thông tin trên vé điện tử mới đủ điều kiện vào ga lên tàu.<br>Ðể đảm bảo quyền lợi cho hành khách, tránh mua phải vé gỉa, hoặc vé không đúng với quy định, quý khách có thể kiểm tra lại vé điện tử của mình bằng cách điền đầy đủ các thông tin dưới dây.</div>
                 </div>
+
+                {{#if valid}}
+                <div class="alert alert-success">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                Thông tin trên vé của quý khách đã được xác thực. Chúc quý khách có chuyến đi vui vẻ!!
+                </div>
+                {{/if}}
+
+                {{#if invalid}}
+                <div class="alert alert-danger">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                 Thông tin trên vé không hợp lệ. Quý khách vui lòng kiểm tra và nhập lại. Xin chân thành cám ơn!
+                </div>
+                {{/if}}
                 
             </div>
         </div>
+        
     <form method="POST">
         <div class="row">
             <div class="col-xs-4 col-sm-2 col-md-1">

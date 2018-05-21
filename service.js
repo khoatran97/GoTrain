@@ -29,4 +29,6 @@ app.use('/', guestController.router);
 
 app.use('/admin', adminController.router);
 
+app.use('./',guestController.router);
+
 app.listen(3000);

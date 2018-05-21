@@ -5,8 +5,8 @@ module.exports.load = sql => {
         var cn = mysql.createConnection({
             host: 'localhost',
             user: 'root',
-            password: 'chun6002',
-            database: 'qlvt'
+            password: '',
+            database: 'gotrain'
         });
 
         cn.connect();

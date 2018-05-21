@@ -1,0 +1,41 @@
+<aside id="colorlib-hero" height="20">
+  <div class="flexslider" height="20">
+    <ul class="slides" height="20">
+      <li style="background-color:powderblue; ">
+        
+      </li>
+      </ul>
+    </div>
+</aside>
+
+    <div class="container" >
+
+        <div class="row">
+            <div class="col-md-12">
+            <br>
+            <br>
+                {{#each trains}}
+					<div style="background-color:blue; color:white; font-family:verdana;"><b>Ngày {{NgayDi}} từ ga {{GaDi}} đến ga {{GaDen}}</b></div>
+					<br>
+					<div><a href="/pick-up?maTau={{MaTau}}&&maChuyen={{MaChuyen}}&&ngay={{NgayDi}}"><i class="fa fa-train fa-5x" style="color:black"></i></a></div>
+					<div><b>Tàu: {{MaTau}}</b></div>
+					<div><b>Giờ đi: {{GioDi}}</div>
+				{{/each}}
+                
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+            <br>
+            <br>
+            {{#each carriges}}
+            <button>1</button>
+            <button>{{MaToa}}</button>
+            {{/each}}
+            </div>
+        </div>
+        
+    
+
+            <br>
+<br>

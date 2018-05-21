@@ -19,6 +19,13 @@ router.get('/contact', (req, res) => {
     res.render('contact');
 });
 
+router.get('/giohang',(req,res)=>{
+
+    res.render('giohang');
+
+})
+
+
 router.get('/destinations', (req, res) => {
     res.render('destinations');
 })
@@ -35,8 +42,15 @@ router.get('/test',(req,res)=>{
 	res.render('test');
 })
 
-router.get('/pick-up', (req, res) => {
-    res.render('pick-up');
+router.get('/pick-up',(req,res)=>{
+    ticketRepo.loadCarriges(req.query).then(rows => {
+        console.log(rows);
+        var vm={
+            carriges:rows
+        }
+        res.render('pick-up', vm);
+    });
+    
 })
 
 // POST
@@ -75,7 +89,6 @@ router.post('/test', (req, res) => {
     			vm={
 	        	valid: true
 	        };
-    		
     	}
     	else {
     		vm={
@@ -90,12 +103,10 @@ router.post('/test', (req, res) => {
 });
 
 router.post('/',(req, res)=>{
-    console.log(req.body);
     var date=formatDate(req.body.NgayDi);
     ticketRepo.lookup(req.body, date).then(rows => {
-        console.log(rows);
         if(rows[0]!=null){
-            res.redirect('/pick-up');
+            res.render('./pick-up', {trains:rows});
         }
         else {
             var vm={
