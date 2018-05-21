@@ -1,8 +1,17 @@
 var express = require('express');
-
+var session = require('express-session');
 var staffRepo = require('../repository/staffRepo')
 
 var router = express.Router();
+
+router.use((req, res, next) => {
+    if (!req.session.username) {
+        res.redirect('login');
+    }
+    else {
+        next();
+    }
+})
 
 router.get('/', (req, res) => {
     res.render('admin/index', {
@@ -11,8 +20,13 @@ router.get('/', (req, res) => {
 })
 
 router.get('/logout', (req, res) => {
-    res.redirect('../')
-})
+    req.session.destroy(function(err) {
+        if(err) {
+            console.log(err);
+        } else {
+            res.redirect('../');
+        }
+})})
 
 
 // Quản lý Nhân viên

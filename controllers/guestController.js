@@ -1,10 +1,12 @@
 var express = require('express');
+var session = require('express-session');
 var userRepo = require('../repository/userRepo');
 var ticketRepo = require('../repository/ticketRepo');
 
 
 // Dieu huong
 var router = express.Router();
+
 
 // GET
 router.get('/', (req, res) => {
@@ -35,7 +37,12 @@ router.get('/services', (req, res) => {
 })
 
 router.get('/login', (req, res) => {
-    res.render('login', {layout: false});
+    if (req.session.username) {
+        res.redirect('admin');
+    }
+    else {
+        res.render('login', {layout: false});
+    }
 })
 
 router.get('/test',(req,res)=>{
@@ -63,7 +70,8 @@ router.post('/login', (req, res) => {
     userRepo.loadByUsername(username).then(rows => {
         console.log(rows);
         if (rows[0] != null) {
-            if (rows[0].password == password) {
+            if (rows[0].Password == password) {
+                req.session.username = username;
                 res.redirect('/admin');
                 isSuccess = true;
             }
@@ -76,7 +84,6 @@ router.post('/login', (req, res) => {
             }
             res.render('login', param);
         }
-        
     });
 });
 

@@ -3,6 +3,7 @@ var hbs = require('express-handlebars');
 var express_handlebars_sections = require('express-handlebars-sections');
 var bodyParser = require('body-parser');
 var path = require('path');
+var session = require('express-session');
 
 var guestController = require('./controllers/guestController');
 var adminController = require('./controllers/adminController');
@@ -24,6 +25,23 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: false
 }));
+
+app.use(session({
+    key: 'userKey',
+    secret: 'GoTrainSession',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        expires: 600000
+    }
+}));
+
+app.use((req, res, next) => {
+    if (!req.session.username) {
+        res.clearCookie('userKey');        
+    }
+    next();
+});
 
 app.use('/', guestController.router);
 
