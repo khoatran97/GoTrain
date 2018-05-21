@@ -26,4 +26,8 @@ router.get('/staff', (req, res) => {
     })
 })
 
+router.get('/addstaff', (req, res) => {
+    res.render('admin/addstaff', {layout: 'admin'});
+})
+
 module.exports.router = router;
