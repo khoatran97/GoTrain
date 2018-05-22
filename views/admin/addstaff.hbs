@@ -8,35 +8,48 @@
     <div class="panel-body">
         <div class="row">
             <div class="col-lg-6">
-                <form role="form">
+                {{#if result}}
+                <div class="alert alert-success" role="alert">
+                    <strong>Thành công!</strong> Thêm nhân viên mới thành công.
+                </div>
+                {{/if}}
+                {{#if _result}}
+                <div class="alert alert-danger" role="alert">
+                    <strong>Thất bại!</strong> Thêm nhân viên mới thất bại.
+                </div>
+                {{/if}}
+                <form role="form" method="POST">
                     <div class="form-group">
                         <label>Họ và tên:</label>
-                        <input class="form-control">
+                        <input class="form-control" name="Hoten">
                     </div>
                     <div class="form-group">
                         <label>Giới tính: </label>
                         <label class="radio-inline">
-                            <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline1" value="option1" checked>Nam
+                            <input type="radio" name="Gioitinh" id="Gioitinh-Nam" value="Nam" checked>Nam
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline2" value="option2">Nữ
+                            <input type="radio" name="Gioitinh" id="Gioitinh-Nu" value="Nu">Nữ
                         </label>
                     </div>
                     <div class="form-group">
                         <label>Ngày sinh:</label>
-                        <input class="form-control">
+                        <input class="form-control" name="Ngaysinh">
+                        <small class="text-muted">
+                            Định dạng: YYYY-MM-dd
+                        </small>
                     </div>
                     <div class="form-group">
                         <label>Số CMND:</label>
-                        <input class="form-control">
+                        <input class="form-control" name="CMND">
                     </div>
                     <div class="form-group">
                         <label>Địa chỉ:</label>
-                        <input class="form-control">
+                        <input class="form-control" name="Diachi">
                     </div>
                     <div class="form-group">
                         <label>Số điện thoại</label>
-                        <input class="form-control">
+                        <input class="form-control" name="Sdt">
                     </div>
                     <div class="row">
                         <div class="col-md-5"></div>

@@ -26,10 +26,13 @@ module.exports.update = (id, hoten, gioitinh, ngaysinh, cmnd, diachi, sodienthoa
 }
 
 //
-module.exports.addUser = (hoten, gioitinh, ngaysinh, cmnd, diachi, sodienthoai) => {
-    var values = [hoten, gioitinh, ngaysinh, cmnd, diachi, sodienthoai]
-    var script = "INSERT INTO NhanVien(HoTen, GioiTinh, NgaySinh, CMND, DiaChi, SoDienThoai, Username) VALUES ?";
-    DAO.save(script, values).then(result => {
+module.exports.addStaff = (hoten, gioitinh, ngaysinh, cmnd, diachi, sodienthoai) => {
+    if (cmnd.length != 9 || (sodienthoai.length != 10 && sodienthoai.length != 11)) {
+        return false
+    }
+    var values = [[hoten, gioitinh, ngaysinh, cmnd, diachi, sodienthoai]];
+    var script = "INSERT INTO NhanVien(HoTen, GioiTinh, NgaySinh, CMND, DiaChi, SoDienThoai) VALUES ?";
+    DAO.save(script, [values]).then(result => {
         if (result.affectedRows == 0) {
             return false;
         }
@@ -37,4 +40,5 @@ module.exports.addUser = (hoten, gioitinh, ngaysinh, cmnd, diachi, sodienthoai) 
             return true;
         }
     })
+    return true;
 }

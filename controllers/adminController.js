@@ -6,7 +6,7 @@ var router = express.Router();
 
 router.use((req, res, next) => {
     if (!req.session.username) {
-        res.redirect('login');
+        res.redirect('/login');
     }
     else {
         next();
@@ -42,6 +42,14 @@ router.get('/staff', (req, res) => {
 
 router.get('/addstaff', (req, res) => {
     res.render('admin/addstaff', {layout: 'admin'});
+})
+
+// POST: Thêm nhân viên
+router.post('/addstaff', (req, res) => {
+    console.log(req.body);
+    var newStaff = req.body;
+    var result = staffRepo.addStaff(newStaff.Hoten, (newStaff.Gioitinh=="Nam")?1:0, newStaff.Ngaysinh, newStaff.CMND, newStaff.Diachi, newStaff.Sdt);
+    res.render('admin/addstaff', {layout: 'admin', _result: !result, result: result});
 })
 
 module.exports.router = router;
