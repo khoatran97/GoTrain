@@ -22,7 +22,7 @@ router.get('/contact', (req, res) => {
 });
 
 router.get('/giohang',(req,res)=>{
-
+   
     res.render('giohang');
 
 })
