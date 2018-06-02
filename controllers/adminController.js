@@ -1,6 +1,7 @@
 var express = require('express');
 var session = require('express-session');
 var staffRepo = require('../repository/staffRepo')
+var stationRepo = require('../repository/stationRepo')
 
 var router = express.Router();
 
@@ -50,6 +51,14 @@ router.post('/addstaff', (req, res) => {
     var newStaff = req.body;
     var result = staffRepo.addStaff(newStaff.Hoten, (newStaff.Gioitinh=="Nam")?1:0, newStaff.Ngaysinh, newStaff.CMND, newStaff.Diachi, newStaff.Sdt);
     res.render('admin/addstaff', {layout: 'admin', _result: !result, result: result});
+})
+
+router.get('/sellticket', (req, res) => {
+    var stations = stationRepo.loadStation();
+    res.render('admin/sellticket', {
+        stations: stations,
+        layout: 'admin'
+    });
 })
 
 module.exports.router = router;
