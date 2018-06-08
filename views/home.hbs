@@ -65,7 +65,7 @@
 				<div id="flight" class="tab-pane fade in active">
 					<form method="post" class="colorlib-form">
 						<div class="row">
-							<div class="col-md-2">
+							<div class="col-md-3">
 								<div class="form-group">
 									<label for="date">Ga Đi:</label>
 									<select name="GaDi" id="GaDi" class="form-control">
@@ -75,7 +75,7 @@
 									</select>
 								</div>
 							</div>
-							<div class="col-md-2">
+							<div class="col-md-3">
 								<div class="form-group">
 									<label for="date">Ga Đến:</label>
 									<select name="GaDen" id="GaDen" class="form-control">
@@ -85,37 +85,16 @@
 									</select>
 								</div>
 							</div>
-							<div class="col-md-2">
-								<div class="form-group">
-									<label for="guests">Chiều Đi</label>
-									<div class="form-field">
-										<i class="icon icon-arrow-down3"></i>
-										<select name="people" id="people" class="form-control">
-											<option value="#">Một Chiều</option>
-											<option value="#">Khứ Hồi</option>
-										</select>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-2">
+							<div class="col-md-3">
 								<div class="form-group">
 									<label for="date">Ngày Đi:</label>
 									<div class="form-field">
 										<i class="icon icon-calendar2"></i>
-										<input type="text" id="date" class="form-control date" placeholder="Ngày Đi" name="NgayDi">
+										<input type="text" id="date" data-date-format="dd/mm/yyyy"  class="form-control date" placeholder="Ngày Đi" name="NgayDi">
 									</div>
 								</div>
 							</div>
-							<div class="col-md-2">
-								<div class="form-group">
-									<label for="date">Ngày Về:</label>
-									<div class="form-field">
-										<i class="icon icon-calendar2"></i>
-										<input type="text" id="date" class="form-control date" placeholder="Ngày Về" name="NgayVe">
-									</div>
-								</div>
-							</div>
-							<div class="col-md-2">
+							<div class="col-md-3">
 								<input type="submit" name="submit" id="submit" value="Tìm Vé" class="btn btn-primary btn-block">
 							</div>
 

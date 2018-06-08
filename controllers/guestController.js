@@ -85,7 +85,10 @@ router.get('/position/', (req, res) => {
 })
 
 router.get('/information/', (req, res) => {
-        res.render('information');
+    ticketRepo.getTicketByChair(req.query.Ghe).then(rows => {
+        console.log(rows);
+        res.render('information', {MaGhe: req.query.Ghe, GiaVe: rows[0].GiaVe});
+    })
 })
 
 
@@ -145,11 +148,27 @@ router.post('/',(req, res)=>{
             res.render('./pick-up', {trains: rows});
         }
         else {
-            var vm={
-                invalid: true
-            };
-            res.render('home', vm);
+            stationRepo.loadStation().then(rows => {
+                res.render('home', {stations: rows, invalid: true});
+            })
         }
+    })
+});
+
+router.post('/information', (req, res) => {
+    var parameter = req.body;
+    ticketRepo.getTicketByChair(req.body.MaGhe).then(rows => {
+        console.log(rows[0])
+        reservationRepo.addTransaction(req.body, rows[0]).then(result => {
+            if (result.affectedRows !== 0) {
+                reservationRepo.setPosition(req.body.MaGhe)
+                reservationRepo.addReservation(rows[0].MaVe, result.insertId, req.body.MaGhe).then(result2 =>{
+                    if (result2.affectedRows !== 0) {
+                        res.render('success', {MaPhieu: result2.insertId, GiaVe: rows[0].GiaVe})
+                    }
+                })
+            }
+        })
     })
 });
 

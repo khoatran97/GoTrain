@@ -4,6 +4,7 @@ var express_handlebars_sections = require('express-handlebars-sections');
 var bodyParser = require('body-parser');
 var path = require('path');
 var session = require('express-session');
+var wnumb = require('wnumb');
 
 var guestController = require('./controllers/guestController');
 var adminController = require('./controllers/adminController');
@@ -13,7 +14,13 @@ var app = express();
 app.engine('hbs', hbs({
     defaultLayout: 'main',
     helpers: {
-        section: express_handlebars_sections()
+        section: express_handlebars_sections(),
+        number_format: n => {
+            var nf = wnumb({
+                thousand: ','
+            });
+            return nf.to(n) + ' ₫';
+        }
     }
 }));
 
