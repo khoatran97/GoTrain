@@ -1,41 +1,58 @@
-<aside id="colorlib-hero" height="20">
-  <div class="flexslider" height="20">
-    <ul class="slides" height="20">
-      <li style="background-color:powderblue; ">
-        
-      </li>
-      </ul>
+<aside id="colorlib-hero">
+    <div class="flexslider">
+        <ul class="slides">
+            <li style="background-image: url(images/img_bg_1.jpg);">
+                <div class="overlay"></div>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3 col-sm-12 col-xs-12 slider-text">
+                            <div class="slider-text-inner text-center">
+                                <h2>Đồng hành cùng bạn</h2>
+                                <h1>Trên mọi nẻo đường</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
     </div>
 </aside>
 
-    <div class="container" >
-
-        <div class="row">
-            <div class="col-md-12">
-            <br>
-            <br>
-                {{#each trains}}
-					<div style="background-color:blue; color:white; font-family:verdana;"><b>Ngày {{NgayDi}} từ ga {{GaDi}} đến ga {{GaDen}}</b></div>
-					<br>
-					<div><a href="/pick-up?maTau={{MaTau}}&&maChuyen={{MaChuyen}}&&ngay={{NgayDi}}"><i class="fa fa-train fa-5x" style="color:black"></i></a></div>
-					<div><b>Tàu: {{MaTau}}</b></div>
-					<div><b>Giờ đi: {{GioDi}}</div>
-				{{/each}}
-                
-            </div>
+<div class="col-md-3">
+</div>
+<div class="col-md-6">
+    <div class="row">
+        <div class="col-md-12">
+            <br> 
+            {{#each trains}}
+                <div class="col-md-3">
+                    <div>
+                        <a href="/chair?MaLich={{MaLich}}">
+                            <img src="/images/train.png">
+                        </a>
+                    </div>
+                    <div>
+                        Tàu: <b>{{MaTau}}</b>
+                    </div>
+                    <div>
+                        Từ <b>{{GaDi}}</b> đến <b>{{GaDen}}</b>
+                    </div>
+                    <div>
+                        Khởi hành: <b>{{GioDi}}</b> ngày <b>{{NgayDiFormated}}</b>
+                    </div>
+                </div>
+            {{/each}}
         </div>
-        <div class="row">
-            <div class="col-md-12">
+    </div>
+    <div class="row">
+        <div class="col-md-12">
             <br>
-            <br>
-            {{#each carriges}}
+            <br> {{#each carriges}}
             <button>1</button>
             <button>{{MaToa}}</button>
             {{/each}}
-            </div>
         </div>
-        
-    
-
-            <br>
-<br>
+    </div>
+</div>
+<div class="col-md-3">
+</div>

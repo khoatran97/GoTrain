@@ -15,11 +15,11 @@ create table NhanVien (
 );
 
 create table TaiKhoan (
-    MaNV int,
-	Username varchar(30) not null primary key,	
+    MaNV int primary key,
+	Username varchar(30) not null,	
 	Password varchar(30) not null,
     foreign key(MaNV)
-    references NhanVien(MaNV),
+    references NhanVien(MaNV)
 );
 
 /****3 loại ghế, mỗi loại ghế sẽ có số Toa tương ứng****/
@@ -51,10 +51,10 @@ create table ChuyenTau(
 );
 /***Mỗi chuyến tàu có nhiều lịch tàu, lịch tàu đc xác định bởi ngày đi và mã chuyến tàu, một chuyến tàu chỉ được bố trí 1 lần trong ngày và 1 tàu xác định**/
 create table LichTau(
+    MaLich int auto_increment primary key,
 	NgayDi date,
     MaChuyen int,
     MaTau int,
-    primary key(NgayDi, MaChuyen, MaTau),
     foreign key(MaChuyen)
     references ChuyenTau(MaChuyen),
     foreign key(MaTau)
@@ -62,30 +62,26 @@ create table LichTau(
 );
 /**Một toa chỉ có một loại ghế ngồi, xác định bởi mã toa, ngày đi, mã chuyến tàu, mã tàu**/
 create table Toa(
-	MaToa int auto_increment,
-    NgayDi date,
-    MaChuyen int,
-    MaTau int,
+	MaToa int auto_increment primary key,
+	TenToa varchar(5),
+	MaLich int,
     LoaiGhe varchar(5),
     SoGheDat int default 0,
     SoGheTrong int default 80,
-    primary key(MaToa, MaTau, NgayDi, MaChuyen),
     foreign key(LoaiGhe)
     references LoaiGhe(MaLoai),
-    foreign key(NgayDi, MaChuyen, MaTau)
-    references LichTau(NgayDi, MaChuyen, MaTau)
+    foreign key(MaLich)
+    references LichTau(MaLich)
 );
 /**Tương ứng mỗi toa sẽ có một số ghế nhất định, được xác định bởi số thứ tự ghế, mã toa, ngày đi, mã chuyến tàu, mã tàu, tình trạng ghế trống - true, đặt-false**/
 create table Ghe(
-	STT int auto_increment,
+	MaGhe int auto_increment primary key,
+	TenGhe varchar(5),
 	MaToa int,
-    NgayDi date,
-    MaChuyen int,
-    MaTau int,
     TinhTrang boolean default true,
-    primary key (STT, MaToa, NgayDi, MaChuyen, MaTau),
-    foreign key(MaToa, MaTau, NgayDi, MaChuyen)
-    references Toa(MaToa, MaTau, NgayDi, MaChuyen)
+    
+    foreign key(MaToa)
+    references Toa(MaToa)
 );
 /**Loai Vé được xác định bởi mã loại vẽ, tương ứng với địa điểm đi - đến và loại ghế ngồi sẽ có giá tiền khác nhau **/
 create table LoaiVe(
@@ -128,15 +124,11 @@ create table PhieuDatVe(
     MaLoaiVe int,
     MaGD int,
     Ghe int,
-    Toa int,
-    NgayDi date,
-    MaTau int,
-    Chuyen int,
     primary key(MaPhieu),
     foreign key(MaLoaiVe)
     references LoaiVe(MaVe),
     foreign key(MaGD)
     references GiaoDich(MaGD),
-    foreign key(Ghe, Toa, NgayDi, Chuyen, MaTau)
-    references Ghe(STT, MaToa, NgayDi, MaChuyen, MaTau)    
+    foreign key(Ghe)
+    references Ghe(MaGhe)    
 );

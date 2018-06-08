@@ -1,0 +1,99 @@
+<div style="height:100px; background:cadetblue" />
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<div class="col-md-1">
+</div>
+<div class="col-md-10">
+    <form method="POST">
+        <div class="row">
+            <div class="col-xs-4 col-sm-2 col-md-1">
+                <label class="mave">Họ và tên:
+                    <!--Mã vé-->
+                </label>
+            </div>
+            <div class="col-xs-8 col-sm-4 col-md-4">
+                <div class="">
+                    <input type="text" class="form-control ng-pristine ng-valid" ng-model="searchData.maVe" ng-disabled="isRequesting" ng-change="maVeError = false"
+                        placeholder="Nhập mã vé bao gồm 8 ký tự số" id="maVe" name="MaVe">
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+            <div class="col-xs-4 col-sm-2 col-md-1">
+                <label class="kt-form-label ng-binding" ng-class="{'has-error': macTauError}">CMND
+                    <!--Mác tàu-->
+                </label>
+            </div>
+            <div class="col-xs-8 col-sm-4 col-md-4">
+                <div class="form-group" ng-class="{'has-error': macTauError}">
+
+                    <input type="text" class="form-control ng-pristine ng-valid" ng-model="searchData.macTau" ng-change="macTauError = false"
+                        placeholder="Ví dụ SE1, TN1, SE2, SE6 ..." id="gaDen" name="MacTau">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-4 col-sm-2 col-md-1">
+                <label class="kt-form-label ng-binding" ng-class="{'has-error': gaDenError}">Số điện thoại
+                    <!--Ga d?n-->
+                </label>
+            </div>
+            <div class="col-xs-8 col-sm-4 col-md-4">
+                <div class="form-group" ng-class="{'has-error': gaDenError}">
+
+                    <input type="text" class="form-control ng-pristine ng-valid" ng-model="searchData.tenGaDen" ng-change="verifyGa(searchData.tenGaDen, false)"
+                        typeahead-on-select="setMaGaDen($item)" typeahead="ga.TenGa for ga in gas | filter:$viewValue | limitTo:10"
+                        placeholder="Nhập mã ga đến tại đây" id="gaDen" aria-autocomplete="list" aria-expanded="false" aria-owns="typeahead-04I-5582"
+                        name="GaDen">
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+            <div class="col-xs-4 col-sm-2 col-md-1">
+                <label class="">Ngày đi</label>
+            </div>
+            <div class="col-xs-8 col-sm-4 col-md-4">
+                <div class="form-field">
+                    <input type="text" id="date" class="form-control date" data-date-format="dd/mm/yyyy" placeholder="Ngày Ði" name="NgayDi">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-4 col-sm-2 col-md-1">
+                <label class="kt-form-label ng-binding" ng-class="{'has-error': gaDiError}">Email
+                    <!--Ga di-->
+                </label>
+            </div>
+            <div class="col-xs-8 col-sm-4 col-md-4">
+                <div class="form-group" ng-class="{'has-error': gaDiError}">
+
+                    <input type="text" class="form-control ng-pristine ng-valid" ng-model="searchData.tenGaDi" ng-change="verifyGa(searchData.tenGaDi, true)"
+                        typeahead-on-select="setMaGaDi($item)" typeahead="ga.TenGa for ga in gas | filter:$viewValue | limitTo:10"
+                        placeholder="Nhập mã ga đi tại đây" id="gaDi" aria-autocomplete="list" aria-expanded="false" aria-owns="typeahead-04K-849"
+                        name="GaDi">
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+            <div class="col-xs-4 col-sm-2 col-md-1">
+                <label class="kt-form-label ng-binding">Số giấy tờ
+                    <!--S? gi?y t?-->
+                </label>
+            </div>
+            <div class="col-xs-8 col-sm-4 col-md-4">
+                <div class="form-group">
+                    <!--<span class="control-label" ng-show="cmtError">Vui lòng nhập số giấy tờ cá nhân ghi trên vé</span>-->
+                    <input type="text" class="form-control ng-pristine ng-valid" ng-model="searchData.cmt" ng-change="cmtError=false" placeholder="Nhập giấy tờ cá nhân ghi trên vé"
+                        name="GiayTo">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-warning">Kiểm tra vé</button>
+        </div>
+
+    </form>
+</div>
+<div class="col-md-1">
+</div>

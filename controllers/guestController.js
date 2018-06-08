@@ -2,6 +2,8 @@ var express = require('express');
 var session = require('express-session');
 var userRepo = require('../repository/userRepo');
 var ticketRepo = require('../repository/ticketRepo');
+var stationRepo = require('../repository/stationRepo');
+var reservationRepo = require('../repository/reservationRepo');
 
 
 // Dieu huong
@@ -10,7 +12,9 @@ var router = express.Router();
 
 // GET
 router.get('/', (req, res) => {
-    res.render('home');
+    stationRepo.loadStation().then(rows => {
+        res.render('home', {stations: rows});
+    })
 });
 
 router.get('/about', (req, res) => {
@@ -22,7 +26,6 @@ router.get('/contact', (req, res) => {
 });
 
 router.get('/giohang',(req,res)=>{
-   
     res.render('giohang');
 
 })
@@ -59,6 +62,32 @@ router.get('/pick-up',(req,res)=>{
     });
     
 })
+
+router.get('/chair/', (req, res) => {
+    var MaLich = req.query.MaLich;
+    reservationRepo.loadAllType().then(rows => {
+        res.render('chair', {MaLich: MaLich, LoaiGhe: rows});
+    })
+})
+
+router.get('/carriage/', (req, res) => {
+    var MaLich = req.query.MaLich;
+    var MaLoai = req.query.MaLoai;
+    reservationRepo.loadCarriage(req.query).then(rows => {
+        res.render('carriage', {Toa:rows});
+    })
+})
+
+router.get('/position/', (req, res) => {
+    reservationRepo.loadPosition(req.query).then(rows => {
+        res.render('position', {Ghe:rows});
+    })
+})
+
+router.get('/information/', (req, res) => {
+        res.render('information');
+})
+
 
 // POST
 router.post('/login', (req, res) => {
@@ -110,10 +139,10 @@ router.post('/test', (req, res) => {
 });
 
 router.post('/',(req, res)=>{
-    var date=formatDate(req.body.NgayDi);
-    ticketRepo.lookup(req.body, date).then(rows => {
+    console.log(req.body);
+    ticketRepo.lookup(req.body).then(rows => {
         if(rows[0]!=null){
-            res.render('./pick-up', {trains:rows});
+            res.render('./pick-up', {trains: rows});
         }
         else {
             var vm={

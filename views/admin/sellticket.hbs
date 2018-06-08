@@ -30,9 +30,6 @@
                             <input class="form-control" name="Hoten">
                         </div>
                     </div>
-                    <div class="panel-footer">
-                        Panel Footer
-                    </div>
                 </div>
             </div>
             <div class="col-lg-6">
@@ -43,7 +40,7 @@
                     <div class="panel-body">
                         <div class="form-group">
                             <label for="exampleFormControlSelect1">Ga đi</label>
-                            <select class="form-control" id="exampleFormControlSelect1">
+                            <select class="form-control" id="GaDi">
                                 {{#each station}}
                                 <option value={{MaGa}}>{{TenGa}}</option>
                                 {{/each}}
@@ -51,53 +48,12 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlSelect1">Ga đến</label>
-                            <select class="form-control" id="exampleFormControlSelect1">
+                            <select class="form-control" id="GaDen">
                                 {{#each station}}
                                 <option value={{MaGa}}>{{TenGa}}</option>
                                 {{/each}}
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label>Ngày đi:</label>
-                            <input class="form-control" name="Hoten">
-                        </div>
-                        <div class="form-group">
-                            <label>Giờ đi:</label>
-                            <input class="form-control" name="Hoten">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleFormControlSelect1">Loại ghế</label>
-                            <select class="form-control" id="exampleFormControlSelect1">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleFormControlSelect1">Toa</label>
-                            <select class="form-control" id="exampleFormControlSelect1">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleFormControlSelect1">Ghế</label>
-                            <select class="form-control" id="exampleFormControlSelect1">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="panel-footer">
-                        Panel Footer
                     </div>
                 </div>
             </div>
