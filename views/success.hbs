@@ -8,16 +8,28 @@
 <div class="col-md-8">
     <br/>
     <div class="alert alert-success" role="alert">
-        <h4 class="alert-heading">Thành công!</h4>
+        <h4 class="alert-heading">Thông tin đặt vé</h4>
         <p>Quý khách đã đặt vé tàu thành công. Để xác nhận đặt vé và tiến hành thanh toán, quý khách vui lòng mang theo đến ga tàu và liên hệ nhân viên bán vé để thanh toán.</p>
         <hr>
         <p>Mã phiếu đặt vé: <b>{{MaPhieu}}</b></p>
+        <p>Mã ghế : <b>{{MaGhe}}</b></p>
         <p>Giá vé: <b>{{number_format GiaVe}}</b></p>
         <hr>
+        {{#with GiaoDich}}
+        <p>Mã giao dịch: <b>{{MaGD}}</b></p>
+        <p>Họ và tên: <b>{{HoTen}}</b></p>
+        <p>Số CMND: <b>{{CMND}}</b></p>
+        <hr>
         <p class="mb-0">Xin chân thành cảm ơn quý khách đã sử dụng dịch vụ của chúng tôi!</p>
+        {{/with}}
     </div>
-    <div class="col-md-12">
-        <a href="/" style="text-align:center">&larr; Trở về trang chủ</a>
+    <div class="row">
+        <div class="col-md-6">
+            <a href="/" style="text-align:center">&larr; Trở về trang chủ</a>
+        </div>
+        <div class="col-md-6">
+            <input type="button" value="In thông tin" onclick="print()"/>
+        </div>
     </div>
     <br/>
     <br/>

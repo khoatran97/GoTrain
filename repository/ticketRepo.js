@@ -1,9 +1,9 @@
 var DAO = require('../fn/dataAccess.js')
 
-module.exports.check = (t, date) => {
-    var script = `select g.*
-from PhieuDatVe p, LoaiVe lv, GiaoDich g
-where p.MaPhieu=${t.MaVe} and p.MaTau=${t.MacTau} and g.CMND=${t.GiayTo} and g.MaGD=p.MaGD and p.MaLoaiVe=lv.MaVe and lv.GaDi=${t.GaDi} and lv.GaDen=${t.GaDen} and p.NgayDi='${date}'`;
+module.exports.check = (t) => {
+    var script = `select g.*, p.MaPhieu
+		from PhieuDatVe p, GiaoDich g
+		where p.MaPhieu=${t.MaVe} and p.Ghe=${t.MaGhe} and g.CMND=${t.CMND} and g.MaGD=p.MaGD`;
     return DAO.load(script);
 }
 

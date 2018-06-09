@@ -18,10 +18,16 @@ module.exports.loadPosition = (data) => {
 
 module.exports.addTransaction = (data, ve) => {
     var sql = `
-        INSERT INTO GiaoDich(TinhTrang, CMND, HoTen, email, sdt, tongtien) Values (1,${data.CMND},"${data.HoTen}","${data.Email}",${data.SoDienThoai},${ve.GiaVe});
+        INSERT INTO GiaoDich(TinhTrang, CMND, HoTen, email, sdt, tongtien) Values (0,${data.CMND},"${data.HoTen}","${data.Email}",${data.SoDienThoai},${ve.GiaVe});
     `;
     console.log(sql);
     return DAO.save(sql);
+}
+
+module.exports.getTransaction = (id) => {
+    var sql = `SELECT * FROM GiaoDich WHERE MaGD = ${id}`
+    console.log(sql);
+    return DAO.load(sql);
 }
 
 module.exports.setPosition = (Id) => {
