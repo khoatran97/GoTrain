@@ -65,3 +65,28 @@ module.exports.cancel = async (ticketId, transactionId) => {
 	})
 	return result;
 }
+
+module.exports.getInformation = (ticketId) => {
+	var sql =`
+		SELECT gh.TenGhe as Ghe, tt.TenToa as Toa, t.TenTau as Tau, Date_format(lt.NgayDi, "%d/%m/%Y") as NgayDi, ct.TenChuyen as ChuyenTau, ct.GioDi as GioDi, g1.TenGa as GaDi, g2.TenGa as GaDen, pdv.MaPhieu as MaPhieu, gd.MaGD as MaGD, gd.HoTen as HoTen, gd.CMND as CMND, gd.TinhTrang as TinhTrang, gd.TongTien as TongTien
+		FROM PhieuDatVe pdv JOIN GiaoDich gd ON pdv.MaGD=gd.MaGD
+			JOIN Ghe gh ON pdv.Ghe=gh.MaGhe
+			JOIN Toa tt ON gh.MaToa=tt.MaToa
+			JOIn LichTau lt ON tt.MaLich=lt.MaLich
+			JOIN Tau t ON lt.MaTau=t.MaTau
+			JOIN ChuyenTau ct ON lt.MaChuyen=ct.MaChuyen
+			JOIN Ga g1 ON ct.GaDi=g1.MaGa
+			JOIN Ga g2 ON ct.GaDen=g2.MaGa
+		WHERE pdv.MaPhieu=${ticketId}
+	`;
+	return DAO.load(sql);
+}
+
+module.exports.pay = (transactionId) => {
+	var sql = `
+		UPDATE GiaoDich 
+		SET TinhTrang=1
+		WHERE MaGD=${transactionId}
+	`;
+	return DAO.save(sql);
+}

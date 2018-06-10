@@ -1,16 +1,79 @@
 <div id="page-wrapper">
     <!-- /.row -->
+    <br/>
     <div class="row">
-        <div class="jumbotron jumbotron-fluid">
-            <div class="container">
-                <h1 class="display-4">GoTrain</h1>
-                <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <form method="POST">
+                <div class="form-group row">
+                    <div class="col-md-9">
+                        <input type="number" class="form-control" name="MaPhieu" placeholder="Mã phiếu đặt vé">
+                    </div>
+                    <button class="col-md-3 btn btn-primary" type="submit">Tìm</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+    {{#if search}}
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <div class="panel panel-default">
+                <div class="panel-heading">Thông tin đặt vé</div>
+                <div class="panel-body">
+                    {{#with data}}
+                        <p>Họ và tên: <b>{{HoTen}}</b></p>
+                        <p>Số CMND: <b>{{CMND}}</b></p>
+                        <hr/>
+                        <p>Mã phiếu đặt vé: <b>{{MaPhieu}}</b></p>
+                        <p>Mã giao dịch: <b>{{MaGD}}</b></p>
+                        <p>Tổng tiền: <b>{{number_format TongTien}}</b></p>
+                        <p>Tình trạng: <b>{{../TinhTrang}}</b></p>
+                        <hr/>
+                        <p>Ga đi: <b>{{GaDi}}</b></p>
+                        <p>Ga đến: <b>{{GaDen}}</b></p>
+                        <p>Ngày đi: <b>{{NgayDi}}</b></p>
+                        <p>Giờ đi: <b>{{GioDi}}</b></p>
+                        <p>Chuyến tàu: <b>{{ChuyenTau}}</b></p>
+                        <p>Tàu: <b>{{Tau}}</b></p>
+                        <p>Toa: <b>{{Toa}}</b></p>
+                        <p>Ghế: <b>{{Ghe}}</b></p>
+                    {{/with}}
+                </div>
+                <div class="panel-footer">
+                    {{#if ThanhToan}}
+                    <form method="POST">
+                        <input name="MaGD" value="{{data.MaGD}}" hidden/>
+                        <input name="ThanhToan" value="1" hidden/>
+                        <button type="submit" class="btn btn-primary">Thanh toán</button>
+                    </form>
+                    {{/if}}
+                    {{#if In}}
+                    <form method="POST">
+                        <button type="button" class="btn btn-primary">In vé</button>
+                    </form>
+                    {{/if}}
+                </div>
             </div>
         </div>
+        <div class="col-md-2"></div>
     </div>
-
-    <div class="row">
-        <button type="button" class="btn btn-primary"><b>Bán vé</b></button>
-    </div>
-
+    {{/if}}
+    {{#if invalid}}
+            <div class="alert alert-danger">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                Không tìm thấy phiếu đặt vé
+            </div>
+            {{/if}}
+            {{#if success}}
+                <div class="alert alert-success" role="alert">
+                    Thanh toán thành công
+                </div>
+            {{/if}}
+            {{#if fail}}
+                <div class="alert alert-success" role="alert">
+                    Thanh toán thất bại
+                </div>
+            {{/if}}
 </div>
