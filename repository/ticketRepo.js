@@ -1,4 +1,5 @@
 var DAO = require('../fn/dataAccess.js')
+var reservationRepo = require('./reservationRepo')
 
 module.exports.check = (t) => {
     var script = `select g.*, p.MaPhieu
@@ -33,4 +34,34 @@ module.exports.getTicketByChair = (chairId) => {
 	`
 	var result;
 	return DAO.load(sql)
+}
+
+module.exports.cancel = async (ticketId, transactionId) => {
+	var result = 0 ;
+	await reservationRepo.getChairCarriageByTicket(ticketId).then(async(rows) =>  {
+		var sql = `UPDATE Ghe
+		SET TinhTrang=1
+		WHERE MaGhe=${rows[0].MaGhe}`
+
+		var sql2 = `
+		UPDATE Toa
+		SET SoGheDat=SoGheDat-1, SoGheTRong=SoGheTRong+1
+		WHERE MaToa=${rows[0].MaToa}`;
+		
+		var sql3 = `
+		UPDATE GiaoDich
+		SET TinhTrang=3
+		WHERE MaGD=${transactionId}`;
+
+		await DAO.save(sql).then(result1 => {
+			result = result + result1.affectedRows;
+		});
+		await DAO.save(sql2).then(result2 => {
+			result = result + result2.affectedRows;
+		});
+		await DAO.save(sql3).then(result3 => {
+			result = result + result3.affectedRows;
+		});
+	})
+	return result;
 }

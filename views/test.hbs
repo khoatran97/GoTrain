@@ -45,18 +45,54 @@
                     <p>Họ và tên: <b>{{HoTen}}</b></p>
                     <p>Mã phiếu đặt vé: <b>{{MaPhieu}}</b></p>
                     <p>Mã giao dịch: <b>{{MaGD}}</b></p>
-                    <p>Tình trạng: <b>{{TinhTrang}}</b></p>
+                    <p>Tình trạng: <b>{{../TinhTrang}}</b></p>
+                    {{#if ../canCancel}}
+                    <hr>
+                    <form method="POST" id="cancelForm">
+                        <input value="1" readonly hidden name="Huy"/>
+                        <input value="{{MaPhieu}}" readonly hidden name="MaPhieu"/>
+                        <input value="{{MaGD}}" readonly hidden name="MaGD"/>
+                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#confirmModal">Huỷ vé này</button>
+                    </form>
+                    <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel"><b>Xác nhận</b></h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    Bạn có muốn tiếp tục huỷ vé đã đặt này?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Không</button>
+                                    <button type="submit" form="cancelForm" class="btn btn-primary">Có</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{/if}}
                 {{/with}}
-                <hr>
-                <button type="button" class="btn btn-dark">Huỷ vé này</button>
             </div>
-            {{/if}} {{#if invalid}}
+            {{/if}} 
+            {{#if invalid}}
             <div class="alert alert-danger">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                 Thông tin trên vé không hợp lệ. Quý khách vui lòng kiểm tra và nhập lại. Xin chân thành cám ơn!
             </div>
             {{/if}}
-
+            {{#if success}}
+                <div class="alert alert-success" role="alert">
+                    Đã huỷ thành công
+                </div>
+            {{/if}}
+            {{#if fail}}
+                <div class="alert alert-success" role="alert">
+                    Thao tác huỷ thất bại
+                </div>
+            {{/if}}
         </div>
     </div>
 

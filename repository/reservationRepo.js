@@ -51,3 +51,11 @@ module.exports.addReservation = (typeId, transactionId, chairId) => {
     console.log(sql);
     return DAO.save(sql);
 }
+
+module.exports.getChairCarriageByTicket = (ticketId) => {
+    var sql = `SELECT g.MaGhe, t.MaToa
+        FROM PhieuDatVe p JOIN Ghe g ON p.Ghe=g.MaGhe	
+            JOIN Toa t ON g.MaToa=t.MaToa
+        WHERE p.MaPhieu=${ticketId}`;
+    return DAO.load(sql);
+}

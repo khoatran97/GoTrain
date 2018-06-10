@@ -162,31 +162,44 @@ router.post('/login', (req, res) => {
 });
 
 router.post('/test', (req, res) => {
-    ticketRepo.check(req.body).then(rows => {
-        console.log(rows);
-        var vm;
-        var TinhTrang;
-        if (rows[0] != null) {
-            switch (rows[0].TinhTrang) {
-                case 0: TinhTrang = "Chưa thanh toán"; break;
-                case 1: TinhTrang = "Đã thanh toán"; break;
-                case 2: TinhTrang = "Đã sử dụng"; break;
-                case 3: TinhTrang = "Đã huỷ"; break;
+    if (req.body.Huy == 1) {
+        ticketRepo.cancel(req.body.MaPhieu, req.body.MaGD).then(result => {
+            if (result == 3)
+                res.render('test', {success: true})
+            else 
+                res.render('test', {fail: true})
+        })
+    }
+    else {
+        ticketRepo.check(req.body).then(rows => {
+            console.log(rows);
+            var vm;
+            var TinhTrang;
+            if (rows[0] != null) {
+                switch (rows[0].TinhTrang) {
+                    case 0: TinhTrang = "Chưa thanh toán"; break;
+                    case 1: TinhTrang = "Đã thanh toán"; break;
+                    case 2: TinhTrang = "Đã sử dụng"; break;
+                    case 3: TinhTrang = "Đã huỷ"; break;
+                }
+                vm = {
+                    data: rows[0],
+                    TinhTrang: TinhTrang,
+                    canCancel: (rows[0].TinhTrang == 0), 
+                    valid: true
+                };
+            } else {
+                vm = {
+                    invalid: true
+                };
             }
-            vm = {
-                data: rows[0],
-                valid: true
-            };
-        } else {
-            vm = {
-                invalid: true
-            };
-        }
-        res.render('test', vm);
+            res.render('test', vm);
 
-    }).catch(err => {
-        res.end('fail');
-    });
+        }).catch(err => {
+            res.end('fail');
+        });
+    }
+    
 });
 
 router.post('/', (req, res) => {
