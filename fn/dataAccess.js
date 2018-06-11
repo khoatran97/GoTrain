@@ -4,10 +4,9 @@ module.exports.load = sql => {
     return new Promise((resolve, reject) => {
         var cn = mysql.createConnection({
             host: 'localhost',
-            post: 8889,
-            socketPath: '/Applications/MAMP/tmp/mysql/mysql.sock',
+            post: 3306,
             user: 'root',
-            password: 'root',
+            password: '',
             database: 'GoTrain'
         });
 
@@ -29,10 +28,9 @@ exports.save = (sql, values) => {
     return new Promise((resolve, reject) => {
         var cn = mysql.createConnection({
             host: 'localhost',
-            port: 8889,
-            socketPath: '/Applications/MAMP/tmp/mysql/mysql.sock',
+            port: 3306,
             user: 'root',
-            password: 'root',
+            password: '',
             database: 'GoTrain'
         });
 
